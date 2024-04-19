@@ -3,4 +3,7 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.androidRoom) apply false
+    alias(libs.plugins.kotlinxSerialization) apply false
+
 }

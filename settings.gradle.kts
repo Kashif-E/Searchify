@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "Searchify"
 include(":app")
 include(":designsystem")
+include(":core")
