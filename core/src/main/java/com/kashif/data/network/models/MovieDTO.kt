@@ -1,10 +1,9 @@
-package com.kashif.data.local.entities
+package com.kashif.data.network.models
 
-import androidx.room.Entity
+import kotlinx.serialization.Serializable
 
-
-@Entity(primaryKeys = [("id")])
-data class MovieEntity(
+@Serializable
+data class MovieDTO(
     var page: Int,
     val poster_path: String?,
     val adult: Boolean,

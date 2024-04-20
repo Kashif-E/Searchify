@@ -60,10 +60,10 @@ class MovieDaoTest {
             results.map { movie ->
                 {
                     val expectedGenres =
-                        MovieDaoTestUtils.moviesList.find { it.id == movie.id }?.genreIds
+                        MovieDaoTestUtils.moviesList.find { it.id == movie.id }?.genre_ids
                     assertIterableEquals(
                         expectedGenres,
-                        movie.genreIds,
+                        movie.genre_ids,
                         "Genres should match for movie ID: ${movie.id}"
                     )
                 }

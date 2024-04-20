@@ -56,6 +56,7 @@ android {
 
 dependencies {
 
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     annotationProcessor(libs.androidx.room.compiler)
     api(libs.hilt.android)
     api(libs.androidx.core.ktx)
