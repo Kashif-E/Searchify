@@ -5,7 +5,10 @@ import com.kashif.data.network.models.MovieDTO
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-
+/**
+ * Validates the accurate mapping of fields from [MovieDTO] and [MovieEntity] to [MovieDomainModel],
+ * ensuring proper data transformation and integrity.
+ */
 class MovieDomainModelTest{
 
     @Test

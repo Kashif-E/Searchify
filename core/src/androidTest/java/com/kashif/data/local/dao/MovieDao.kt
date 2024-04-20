@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Assertions.assertIterableEquals
 import org.junit.jupiter.api.assertAll
 import javax.inject.Inject
 
+/**
+ * Tests MovieDao operations for accuracy and proper data handling, including CRUD operations and Converters.
+ */
 
 @HiltAndroidTest
 @SmallTest
