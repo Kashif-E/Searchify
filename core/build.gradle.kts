@@ -1,10 +1,13 @@
+import org.gradle.internal.impldep.org.junit.platform.launcher.TagFilter.includeTags
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.androidRoom)
-    alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.kotlinxSerialization)
-    id("kotlin-kapt")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.androidRoom)
+    alias(libs.plugins.androidJunit5)
 }
 
 android {
@@ -14,11 +17,11 @@ android {
     defaultConfig {
         minSdk = 21
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.kashif.Runner"
         consumerProguardFiles("consumer-rules.pro")
     }
-    room {
-        schemaDirectory("$projectDir/schemas")
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
     }
     buildTypes {
         release {
@@ -33,27 +36,49 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    hilt {
+        enableAggregatingTask = false
+    }
 
+    room { schemaDirectory("$projectDir/schemas") }
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    testOptions {
+        unitTests.all {
+            it.testLogging {
+                events("skipped", "passed", "failed")
+            }
+        }
+    }
+
 }
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
-    //noinspection KaptUsageInsteadOfKsp
-    kapt(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.retrofit)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-    implementation(libs.retrofit2.kotlinx.serialization.converter)
-    implementation(libs.kotlinx.serialization.json)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+    api(libs.hilt.android)
+    api(libs.androidx.core.ktx)
+    api(libs.androidx.room.ktx)
+    api(libs.androidx.room.runtime)
+    api(libs.javapoet)
+    api(libs.kotlinx.serialization.json)
+    api(libs.retrofit)
+    api(libs.retrofit2.kotlinx.serialization.converter)
+    ksp(libs.androidx.room.compiler)
+    ksp(libs.hilt.android.compiler)
+    kspTest(libs.hilt.android.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.espresso.core)
-    kaptTest(libs.hilt.android.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.javapoet)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.junit.jupiter.params)
+    androidTestImplementation(libs.junit.jupiter.api)
+    androidTestImplementation(libs.android.test.extensions)
+
+
 }

@@ -1,6 +1,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.androidRoom)
 }
 
 android {
@@ -47,18 +51,32 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+
+    room { schemaDirectory("$projectDir/schemas") }
+
 }
 
 dependencies {
-
+    annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(projects.designsystem)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(projects.core)
+    implementation(libs.hilt.android)
+    ksp(libs.androidx.room.compiler)
+    ksp(libs.hilt.android.compiler)
+    kspTest(libs.hilt.android.compiler)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.javapoet)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.junit.jupiter.params)
+    androidTestImplementation(libs.junit.jupiter.api)
+    androidTestImplementation(libs.android.test.extensions)
 }
