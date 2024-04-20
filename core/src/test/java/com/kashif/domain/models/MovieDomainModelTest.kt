@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 
-class MovieMappingTests {
+class MovieDomainModelTest{
 
     @Test
     fun `MovieDTO asDomainModel maps fields correctly`() {
