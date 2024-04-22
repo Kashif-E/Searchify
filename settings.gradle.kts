@@ -25,3 +25,4 @@ rootProject.name = "Searchify"
 include(":app")
 include(":designsystem")
 include(":core")
+include(":Feature-Search")

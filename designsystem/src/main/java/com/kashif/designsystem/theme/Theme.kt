@@ -6,8 +6,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import com.kashif.designsystem.theme.colors.LocalColors
-import com.kashif.designsystem.theme.colors.darkMovieColors
-import com.kashif.designsystem.theme.colors.lightMovieColors
+import com.kashif.designsystem.theme.colors.darkExtendedColors
+import com.kashif.designsystem.theme.colors.lightExtendedColors
 import com.kashif.designsystem.theme.shapes.LocalShapes
 import com.kashif.designsystem.theme.shapes.Shapes
 import com.kashif.designsystem.theme.spacing.ExtendedSpacing
@@ -48,7 +48,7 @@ fun getColorPalette(darkTheme: Boolean): Colors =  Colors(
         // CompositionLocalProvider is used to provide custom theme values to the Compose hierarchy.
         CompositionLocalProvider(
             // Provide the extended colors based on the darkTheme parameter.
-            LocalColors provides if (darkTheme) darkMovieColors else lightMovieColors,
+            LocalColors provides if (darkTheme) darkExtendedColors else lightExtendedColors,
             // Provide the custom shapes defined by Shapes.
             LocalShapes provides Shapes,
             // Provide the custom spacing values.

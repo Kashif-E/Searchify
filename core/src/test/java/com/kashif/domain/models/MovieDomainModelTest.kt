@@ -1,7 +1,9 @@
 package com.kashif.domain.models
 
 import com.kashif.data.local.entities.MovieEntity
+import com.kashif.data.local.entities.asDomainModel
 import com.kashif.data.network.models.MovieDTO
+import com.kashif.data.network.models.asDomainModel
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -21,8 +23,28 @@ class MovieDomainModelTest{
         val domainModel = dto.asDomainModel()
 
         // Assert
+        assertEquals(MovieDomainModel.getBackdropPath(dto.backdrop_path), domainModel.backdropPath)
         assertEquals(MovieDomainModel.getPosterPath(dto.poster_path), domainModel.posterPath)
-        assertEquals("2021 Apr 05", domainModel.releaseDate)
+        assertEquals("Apr-2021", domainModel.releaseDate)
+        assertEquals("8.05", domainModel.popularity)
+        assertEquals("9.04", domainModel.voteAverage)
+        assertEquals(dto.vote_count.toString(), domainModel.voteCount)
+        assertEquals(dto.video, domainModel.video)
+
+    }
+    @Test
+    fun `asDomainModel handles non parsable dates`() {
+
+        //Arrange
+        val dto = TestUtil.sampleMovieDTO.copy(release_date = "2021:30:33")
+
+        // Act
+        val domainModel = dto.asDomainModel()
+
+        // Assert
+        assertEquals(MovieDomainModel.getBackdropPath(dto.backdrop_path), domainModel.backdropPath)
+        assertEquals(MovieDomainModel.getPosterPath(dto.poster_path), domainModel.posterPath)
+        assertEquals("", domainModel.releaseDate)
         assertEquals("8.05", domainModel.popularity)
         assertEquals("9.04", domainModel.voteAverage)
         assertEquals(dto.vote_count.toString(), domainModel.voteCount)
@@ -40,8 +62,9 @@ class MovieDomainModelTest{
         val domainModel = entity.asDomainModel()
 
         // Assert
+        assertEquals(MovieDomainModel.getBackdropPath(entity.backdrop_path), domainModel.backdropPath)
         assertEquals(MovieDomainModel.getPosterPath(entity.poster_path), domainModel.posterPath)
-        assertEquals("2021 Apr 05", domainModel.releaseDate)
+        assertEquals("Apr-2021", domainModel.releaseDate)
         assertEquals("7.54", domainModel.popularity)
         assertEquals("8.57", domainModel.voteAverage)
         assertEquals(entity.vote_count.toString(), domainModel.voteCount)
@@ -57,7 +80,7 @@ object TestUtil {
         poster_path = "/path/to/poster.jpg",
         adult = true,
         overview = "Great movie",
-        release_date =  "2021:04:05T20:23:23",
+        release_date =  "2021-04-05",
         genre_ids = listOf(16, 28),
         id = 101L,
         original_title = "A Sample Movie",
@@ -76,7 +99,7 @@ object TestUtil {
         poster_path = "/path/to/poster.jpg",
         adult = false,
         overview = "Another great movie",
-        release_date = "2021:04:05T20:23:23",
+        release_date = "2021-04-05",
         genre_ids = listOf(16, 28),
         id = 102L,
         original_title = "Another Sample Movie",

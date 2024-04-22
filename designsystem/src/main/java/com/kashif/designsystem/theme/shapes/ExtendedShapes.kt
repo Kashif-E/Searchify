@@ -3,7 +3,6 @@ package com.kashif.designsystem.theme.shapes
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 
@@ -16,7 +15,6 @@ import androidx.compose.ui.unit.dp
 @Immutable
 data class ExtendedShapes(
     val cardShape: Shape,
-    val bottomSheetShape: Shape,
     val buttonShape: Shape,
     val chipShape: Shape,
     val textFieldShape: Shape,
@@ -33,12 +31,16 @@ data class ExtendedShapes(
 val Shapes =
     ExtendedShapes(
         cardShape = RoundedCornerShape(12.dp),
-        bottomSheetShape = RectangleShape,
         buttonShape = RoundedCornerShape(8.dp),
         chipShape = RoundedCornerShape(14.dp),
         textFieldShape = RoundedCornerShape(8.dp),
         variantShape = RoundedCornerShape(8.dp),
-        imageShape = RoundedCornerShape(8.dp),
+        imageShape = RoundedCornerShape(
+            topStart = 8.dp,
+            topEnd = 8.dp,
+            bottomStart = 0.dp,
+            bottomEnd = 0.dp
+        ),
         pillShape = RoundedCornerShape(30.dp),
         statusShape = RoundedCornerShape(6.dp)
     )

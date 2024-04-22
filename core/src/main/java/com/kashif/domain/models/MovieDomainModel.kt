@@ -1,7 +1,5 @@
 package com.kashif.domain.models
 
-import com.kashif.data.local.entities.MovieEntity
-import com.kashif.data.network.models.MovieDTO
 import java.text.SimpleDateFormat
 import java.util.Locale
 import javax.annotation.concurrent.Immutable
@@ -28,9 +26,6 @@ data class MovieDomainModel(
     companion object {
         private const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"
         private const val BASE_BACKDROP_PATH = "https://image.tmdb.org/t/p/w780"
-        private const val YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v="
-        private const val YOUTUBE_THUMBNAIL_URL = "https://img.youtube.com/vi/"
-
 
         fun getPosterPath(posterPath: String?): String {
             return BASE_POSTER_PATH + posterPath
@@ -40,24 +35,13 @@ data class MovieDomainModel(
             return BASE_BACKDROP_PATH + backdropPath
         }
 
-        fun getYoutubeVideoPath(videoPath: String?): String {
-            return YOUTUBE_VIDEO_URL + videoPath
-        }
-
-        fun getYoutubeThumbnailPath(thumbnailPath: String?): String {
-            return "$YOUTUBE_THUMBNAIL_URL$thumbnailPath/default.jpg"
-        }
-
-        fun parseAndFormatDateTime(isoDateTime: String?): String? {
-            val inputFormat = SimpleDateFormat("yyyy:MM:dd'T'HH:mm:ss", Locale.ENGLISH)
-
-            val outputFormat = SimpleDateFormat("yyyy MMM dd", Locale.ENGLISH)
+        fun parseAndFormatDateTime(inputDate: String?): String? {
             return try {
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+                val parsedDate = inputDate?.let { inputFormat.parse(it) }
 
-                val date = isoDateTime?.let { inputFormat.parse(it) } ?: run { return null }
-
-                outputFormat.format(date)
-
+                val outputFormat = SimpleDateFormat("MMM-yyyy", Locale.US)
+                parsedDate?.let { outputFormat.format(it) }
             } catch (e: Exception) {
                 e.printStackTrace()
                 null
@@ -71,41 +55,4 @@ data class MovieDomainModel(
 
 }
 
-fun MovieDTO.asDomainModel() = MovieDomainModel(
-    page = this.page, posterPath = MovieDomainModel.getPosterPath(this.poster_path),
-    adult = this.adult,
-    overview = this.overview,
-    releaseDate = release_date?.let { MovieDomainModel.parseAndFormatDateTime(release_date) }
-        ?: run { "" },
-    genreIds = this.genre_ids,
-    id = this.id,
-    originalTitle = this.original_title,
-    originalLanguage = this.original_language,
-    title = this.title,
-    backdropPath = this.backdrop_path,
-    popularity = MovieDomainModel.formatFloat(this.popularity),
-    voteAverage = MovieDomainModel.formatFloat(this.vote_average),
-    voteCount = this.vote_count.toString(),
-    video = video
-
-)
-
-fun MovieEntity.asDomainModel() = MovieDomainModel(
-    page = this.page, posterPath = MovieDomainModel.getPosterPath(this.poster_path),
-    adult = this.adult,
-    overview = this.overview,
-    releaseDate = release_date?.let { MovieDomainModel.parseAndFormatDateTime(release_date) }
-        ?: run { "" },
-    genreIds = this.genre_ids,
-    id = this.id,
-    originalTitle = this.original_title,
-    originalLanguage = this.original_language,
-    title = this.title,
-    backdropPath = this.backdrop_path,
-    popularity = MovieDomainModel.formatFloat(this.popularity),
-    voteAverage = MovieDomainModel.formatFloat(this.vote_average),
-    voteCount = this.vote_count.toString(),
-    video = video
-
-)
 

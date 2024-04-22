@@ -56,6 +56,9 @@ android {
     }
 
     room { schemaDirectory("$projectDir/schemas") }
+    hilt {
+        enableAggregatingTask = false
+    }
 
 }
 
@@ -66,6 +69,7 @@ dependencies {
     implementation(projects.designsystem)
     implementation(projects.core)
     implementation(libs.hilt.android)
+    implementation(projects.featureSearch)
     ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.android.compiler)
     kspTest(libs.hilt.android.compiler)

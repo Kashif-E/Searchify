@@ -1,10 +1,12 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.kashif.designsystem"
+    namespace = "com.kashif.feature_search"
     compileSdk = 34
 
     defaultConfig {
@@ -36,22 +38,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.12"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
 
-    api(libs.androidx.activity.compose)
-    api(libs.androidx.ui)
-    api(libs.androidx.material)
-    api(libs.androidx.navigation.compose)
-    api(libs.androidx.animation)
-    api(libs.androidx.foundation)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(projects.core)
+    implementation(projects.designsystem)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+
 }
