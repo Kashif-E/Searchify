@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.kashif.designsystem.components.TextInputField
@@ -17,7 +18,7 @@ fun SearchCardWithBorder(
     onSubmit: () -> Unit,
 ) {
     TextInputField(
-        modifier = modifier
+        modifier = modifier.testTag("search")
             .fillMaxWidth(),
         label = label,
         placeHolder = label,

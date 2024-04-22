@@ -2,6 +2,7 @@ package com.kashif.data.network.models
 
 import com.kashif.data.local.entities.MovieEntity
 import com.kashif.domain.models.MovieDomainModel
+import com.kashif.domain.utils.suspendMap
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -47,7 +48,7 @@ fun MovieDTO.asEntity() = MovieEntity(
     vote_average
 )
 
-fun List<MovieDTO>.asEntity() = map { it.asEntity() }
+suspend fun List<MovieDTO>.asEntity() = suspendMap { it.asEntity() }
 
 fun MovieDTO.asDomainModel() = MovieDomainModel(
     page = this.page, posterPath = MovieDomainModel.getPosterPath(this.poster_path),
@@ -69,4 +70,4 @@ fun MovieDTO.asDomainModel() = MovieDomainModel(
 )
 
 
-fun List<MovieDTO>.asDomainModel() = map { movieDTO -> movieDTO.asDomainModel() }
+suspend fun List<MovieDTO>.asDomainModel() = suspendMap { movieDTO -> movieDTO.asDomainModel() }

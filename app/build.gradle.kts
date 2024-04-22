@@ -60,7 +60,20 @@ android {
         enableAggregatingTask = false
     }
 
-}
+    packaging {
+        resources.excludes.add("META-INF/LICENSE.md")
+    }
+
+    packaging {
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+        ))
+    }
+
+
+    }
 
 dependencies {
     annotationProcessor(libs.androidx.room.compiler)
@@ -68,19 +81,31 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(projects.designsystem)
     implementation(projects.core)
-    implementation(libs.hilt.android)
     implementation(projects.featureSearch)
+    implementation(libs.hilt.android)
     ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.android.compiler)
     kspTest(libs.hilt.android.compiler)
+
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
+    kspTest(libs.hilt.android.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.javapoet)
     androidTestImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.junit.jupiter.params)
     androidTestImplementation(libs.junit.jupiter.api)
     androidTestImplementation(libs.android.test.extensions)
+    testImplementation(libs.turbine)
+
+    androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(libs.ui.test.manifest)
 }

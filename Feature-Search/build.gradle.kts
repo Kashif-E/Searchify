@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.androidJunit5)
 }
 
 android {
@@ -38,13 +39,43 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.12"
     }
+
+    packaging {
+        resources.excludes.add("META-INF/LICENSE.md")
+    }
+
+
 }
 
 dependencies {
 
-    implementation(projects.core)
+    api(projects.core)
     implementation(projects.designsystem)
     implementation(libs.hilt.android)
+
     ksp(libs.hilt.android.compiler)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
+    kspTest(libs.hilt.android.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.javapoet)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.junit.jupiter.params)
+    androidTestImplementation(libs.junit.jupiter.api)
+    androidTestImplementation(libs.android.test.extensions)
+    testImplementation(libs.turbine)
+
+    androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(libs.ui.test.manifest)
+
+
 
 }

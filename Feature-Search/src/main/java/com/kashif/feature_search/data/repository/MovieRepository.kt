@@ -6,6 +6,7 @@ import com.kashif.data.local.entities.asDomainModel
 import com.kashif.data.network.models.asDomainModel
 import com.kashif.data.network.models.asEntity
 import com.kashif.domain.models.MovieDomainModel
+import com.kashif.domain.utils.suspendMap
 import com.kashif.feature_search.data.remote.MovieService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -21,7 +22,7 @@ class MovieRepository @Inject constructor(
             val response = movieService.getMovies(page)
             if (response.isSuccessful && response.body() != null) {
                 val movies = response.body()!!.results
-                movies.map { it.copy(page = response.body()!!.page) }
+                movies.suspendMap { it.copy(page = response.body()!!.page) }
                 movieDao.insertMovieList(movies.asEntity())
                 emit(movies.asDomainModel())
             } else {

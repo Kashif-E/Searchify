@@ -10,20 +10,21 @@ import com.kashif.feature_search.domain.Result
 import com.kashif.feature_search.domain.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
     private val movieRepository: IMovieRepository,
@@ -37,29 +38,27 @@ class MoviesViewModel @Inject constructor(
     val moviePagingState = _moviePagingState.asStateFlow()
     private val _movies = MutableStateFlow(listOf<MovieDomainModel>())
     val moviesState = _movies.asStateFlow()
-    val searchQuery = MutableStateFlow("")
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
 
-    private val _searchMoviesState = MutableStateFlow<List<MovieDomainModel>>(listOf())
-    val searchMoviesState = _searchMoviesState.asStateFlow()
+    private val _searchMoviesState by lazy {
+        searchQuery.debounce(300L).filter { query ->
 
-    init {
-        viewModelScope.launch(defaultDispatcher) {
-            searchQuery.debounce(300L).filter { query ->
-                query.isNotEmpty()
-            }.map { query ->
-                val queryCharacters = query.toCharArray().filter { it.isWhitespace().not() }
-                moviesState.value.filter { data ->
-                    queryCharacters.all { char ->
-                        data.title.contains(char, true)
-                    }
-                }.sortedBy { queryCharacters[0] }
+            query.isNotEmpty()
+        }.map { query ->
+            val queryCharacters = query.toCharArray().filter { it.isWhitespace().not() }
+            moviesState.value.filter { data ->
 
-            }.collectLatest { movielist ->
-                _searchMoviesState.update { movielist }
-            }
-        }
-        onEvent(UIEvent.FetchNextPage)
+                queryCharacters.all { char ->
+                    data.title.contains(char, true)
+                }
+            }.sortedBy { queryCharacters[0] }
+
+        }.stateIn(viewModelScope + defaultDispatcher, SharingStarted.Eagerly, emptyList())
     }
+    val searchMoviesState = _searchMoviesState
+
+
 
     fun getCurrentPage() = currentPage
     fun onEvent(event: UIEvent) {
@@ -70,6 +69,9 @@ class MoviesViewModel @Inject constructor(
         }
     }
 
+    init {
+        onEvent(UIEvent.FetchNextPage)
+    }
     private fun fetchNextPage() {
         if (_moviePagingState.value !is PagingState.Loading && _moviePagingState.value !is PagingState.Appending) {
             getMovies()
@@ -83,7 +85,6 @@ class MoviesViewModel @Inject constructor(
             movieRepository.getMovies(currentPage).asResult().collectLatest { result ->
                 when (result) {
                     is Result.Error -> {
-                        delay(1000)
                         _moviePagingState.update { PagingState.Error(result.errorMessage) }
 
                     }
@@ -112,7 +113,7 @@ class MoviesViewModel @Inject constructor(
     }
 
     private fun updateSearch(searchText: String) {
-        searchQuery.update { searchText }
+        _searchQuery.update { searchText }
     }
 }
 

@@ -2,10 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="MovieDaoTest">
+      <entry key="NodeExists()">
+        <State />
+      </entry>
+      <entry key="SearchScreenKtTest">
+        <State />
+      </entry>
+      <entry key="SearchScreenKtTest (1)">
         <State />
       </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="testSearchScreen()">
         <State />
       </entry>
     </value>
