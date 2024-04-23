@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -41,7 +42,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -170,13 +174,23 @@ private fun SharedTransitionScope.ScreenContent(
     animatedVisibilityScope: AnimatedContentScope,
     onItemClick: (url: String) -> Unit,
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
+
     val lazyListState = rememberLazyGridState()
+    val focusRequester = remember {
+        FocusRequester()
+    }
+    val localFocusManager = LocalFocusManager.current
+
     Column(
         modifier = Modifier
             .padding(paddingValues)
             .padding(horizontal = LocalSpacing.current.m)
-            .padding(top = LocalSpacing.current.m),
+            .padding(top = LocalSpacing.current.m)
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                  localFocusManager.clearFocus()
+                })
+            },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(
             LocalSpacing.current.l
@@ -187,13 +201,13 @@ private fun SharedTransitionScope.ScreenContent(
             label = stringResource(R.string.search_movies),
             onTextChange = { query ->
                 if (query.isEmpty()) {
-                    keyboardController?.hide()
+                    localFocusManager.clearFocus()
                 }
                 onEvent(UIEvent.UpdateSearchQuery(query))
 
             },
             onSubmit = {
-                keyboardController?.hide()
+                localFocusManager.clearFocus()
                 onEvent(UIEvent.UpdateSearchQuery(searchText))
             })
 
