@@ -176,9 +176,6 @@ private fun SharedTransitionScope.ScreenContent(
 ) {
 
     val lazyListState = rememberLazyGridState()
-    val focusRequester = remember {
-        FocusRequester()
-    }
     val localFocusManager = LocalFocusManager.current
 
     Column(
@@ -188,7 +185,7 @@ private fun SharedTransitionScope.ScreenContent(
             .padding(top = LocalSpacing.current.m)
             .pointerInput(Unit) {
                 detectTapGestures(onTap = {
-                  localFocusManager.clearFocus()
+                    localFocusManager.clearFocus()
                 })
             },
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -201,10 +198,9 @@ private fun SharedTransitionScope.ScreenContent(
             label = stringResource(R.string.search_movies),
             onTextChange = { query ->
                 if (query.isEmpty()) {
-                    localFocusManager.clearFocus()
+                    localFocusManager.clearFocus(true)
                 }
                 onEvent(UIEvent.UpdateSearchQuery(query))
-
             },
             onSubmit = {
                 localFocusManager.clearFocus()
