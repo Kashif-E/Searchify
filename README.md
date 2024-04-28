@@ -9,6 +9,8 @@
   <li>MVI + CA</li>
   <li> Realtime search </li>
   <li> Tests</li>
+  <li>Image cache</li>
+  <li> light and dark mode </li>
 </ul>
 
 ## Built With
@@ -22,5 +24,8 @@
   <li>Junit 5</li>
 </ul>
 
-https://github.com/Kashif-E/Searchify/assets/61690178/654668b4-b103-4a36-b147-418a956d6a81
+https://github.com/Kashif-E/Searchify/assets/61690178/5a776c3c-f0f8-4fb2-beee-5c46e949b68e
+
+
+
 
