@@ -8,6 +8,7 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
@@ -28,7 +29,7 @@ enum class Route(val route: String) {
 @Composable
 fun NavHost(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
-    val viewModel: MoviesViewModel = hiltViewModel()
+
     SharedTransitionLayout(
         modifier = modifier,
     ) {
@@ -45,7 +46,10 @@ fun NavHost(modifier: Modifier = Modifier) {
             composable(
                 route = Route.List.route
             ) {
-
+                val parentEntry = remember(it) {
+                    navController.getBackStackEntry(Route.List.route)
+                }
+                val viewModel: MoviesViewModel = hiltViewModel(parentEntry)
                 SearchScreen(
                     viewModel = viewModel,
                     animatedVisibilityScope = this@composable,
@@ -58,6 +62,10 @@ fun NavHost(modifier: Modifier = Modifier) {
                 route = Route.Details.route
             ) { backstackEntry ->
 
+                val parentEntry = remember(backstackEntry) {
+                    navController.getBackStackEntry(Route.List.route)
+                }
+                val viewModel: MoviesViewModel = hiltViewModel(parentEntry)
                 val url = backstackEntry.getParameter("url")
                 DetailsScreen(
                     url = url,
