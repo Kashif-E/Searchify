@@ -9,6 +9,8 @@
   <li>MVI + CA</li>
   <li> Realtime search </li>
   <li> Tests</li>
+  <li>Image cache</li>
+  <li> light and dark mode </li>
 </ul>
 
 ## Built With
