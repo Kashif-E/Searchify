@@ -18,10 +18,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
@@ -42,11 +42,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.kashif.designsystem.components.AppBar
@@ -93,9 +91,8 @@ fun SharedTransitionScope.SearchScreen(
         viewModel.getCurrentPage(),
         pagingState,
         animatedVisibilityScope,
-        onItemClick,
-
-        )
+        onItemClick
+    )
 
 }
 
@@ -175,7 +172,7 @@ private fun SharedTransitionScope.ScreenContent(
     onItemClick: (url: String) -> Unit,
 ) {
 
-    val lazyListState = rememberLazyGridState()
+    val lazyListState = rememberLazyStaggeredGridState()
     val localFocusManager = LocalFocusManager.current
 
     Column(
@@ -208,22 +205,21 @@ private fun SharedTransitionScope.ScreenContent(
             })
 
 
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
+        LazyVerticalStaggeredGrid(
+            columns = StaggeredGridCells.Adaptive(110.dp),
             state = lazyListState,
             modifier = Modifier
                 .background(LocalColors.current.background)
                 .systemBarsPadding(),
             horizontalArrangement = Arrangement.spacedBy(LocalSpacing.current.l),
-            verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.s),
+            verticalItemSpacing = LocalSpacing.current.s,
         ) {
-
             when (screenState) {
                 SearchScreenState.NormalState -> {
                     paging(
                         items = moviesState,
                         currentPage = currentPage,
-                        fetch = { onEvent(UIEvent.FetchNextPage) }) { movie ->
+                        fetch = { onEvent(UIEvent.FetchNextPage) }) { movie, index ->
                         MovieCard(
                             modifier = Modifier.sharedElement(
                                 state = rememberSharedContentState(
@@ -236,9 +232,9 @@ private fun SharedTransitionScope.ScreenContent(
                 }
 
                 SearchScreenState.SearchState -> {
-                    items(searchMoviesState, contentType = { movie ->
+                    itemsIndexed(searchMoviesState, contentType = { movie, index ->
                         movie::class.java.name
-                    }) { movie ->
+                    }) { index, movie ->
                         MovieCard(
                             modifier = Modifier.sharedElement(
                                 state = rememberSharedContentState(

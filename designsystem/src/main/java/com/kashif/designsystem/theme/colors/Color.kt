@@ -4,47 +4,47 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 
-val Green10 = Color(0XFFE3F4E7)
-private val Green20 = Color(0xFFC7E5CE)
-private val Green30 = Color(0xFFb5cebb)
-private val Green40 = Color(0xFFb5cebb)
-private val Green50 = Color(0xFF02BC87)
-private val Green70 = Color(0xFF009578)
-private val Green80 = Color(0xFF047861)
+val Green10 = Color(0xFFE3F2FD)
+private val Green20 = Color(0xFFBBDEFB)
+private val Green30 = Color(0xFF90CAF9)
+private val Green40 = Color(0xFF64B5F6)
+private val Green50 = Color(0xFF42A5F5)
+private val Green70 = Color(0xFF1976D2)
+private val Green80 = Color(0xFF0D47A1)
+
+
 
 private val Red20 = Color(0xFFFFDCDC)
-private val Red30 = Color(0xFFDBB5B5)
+private val Red30 = Color(0xFFFFB5B5)
 private val Red40 = Color(0xFFE57373)
 private val Red50 = Color(0xFFEA5B5B)
 private val Red70 = Color(0xFFFF002A)
 
 private val Yellow20 = Color(0xFFFFE2C7)
-private val Yellow30 = Color(0xFFD9B899)
+private val Yellow30 = Color(0xFFFFD9B8)
 private val Yellow50 = Color(0xFFFFBE21)
 private val Yellow60 = Color(0xFFEDB120)
 
-private val Blue20 = Color(0xFFD7F6FF)
-private val Blue30 = Color(0xFFa9d7e4)
-private val Blue50 = Color(0xFF009DCD)
-private val Blue60 = Color(0xFF008bb5)
-val DarkBlue50 = Color(0xFF070A56)
-private val DarkBlue60 = Color(0xFF43468b)
+private val Black = Color(0xFF000000)
+
+private val Grey10 = Color(0xFFE6E6E6)
+private val Grey20 = Color(0xFFD9D9D9)
+private val Grey30 = Color(0xFFBEBEBE)
+private val Grey40 = Color(0xFFA6A6A6)
+private val Grey50 = Color(0xFF7F7F7F)
+private val Grey60 = Color(0xFF595959)
+private val Grey70 = Color(0xFF262626)
+private val Grey90 = Color(0xFF000000)
+private val Grey100 = Color(0xFF000000)
+val Grey110 = Color(0xFF000000)
+val fadeWhite = Color(0x99CCCCCC)
+
+
+
 
 private val YellowGreenSecondary = Color(0xFF6EF633)
 
-private val Grey10 = Color(0xffffffff)
-private val Grey20 = Color(0xfffcfcfc)
-private val Grey30 = Color(0xfff3f4f5)
-private val Grey40 = Color(0xffe5e5e5)
-private val Grey50 = Color(0xffb5b4ba)
-private val Grey60 = Color(0xff84858d)
-private val Grey70 = Color(0xff3d3d3e)
-private val Grey90 = Color(0xff1f1f1f)
-private val Grey100 = Color(0xff161616)
-val Grey110 = Color(0xff0f0f0f)
-val fadeWhite = Color(0x99FFFFFF)
 
-private val WhiteTransparent = Color(0x44FFFFFF)
 
 
 /**
@@ -53,19 +53,19 @@ private val WhiteTransparent = Color(0x44FFFFFF)
 val lightExtendedColors =
     ExtendedColors(
         primary = Green50,
-        primaryVariant = Blue50,
-        secondary = DarkBlue50,
+        primaryVariant = Grey50,
+        secondary = Grey50,
         secondaryVariant = YellowGreenSecondary,
         background = Grey20,
         surface = Grey10,
-        onPrimary = Grey10,
+        onPrimary = Color.White,
         onSecondary = Grey10,
-        onBackground = DarkBlue50,
-        onSurface = DarkBlue50,
+        onBackground = Grey50,
+        onSurface = Color.Black,
         error = Red50,
         onError = Grey10,
-        primaryVariantLight = Blue20,
-        primaryVariantLightBG = Blue20,
+        primaryVariantLight = Grey20,
+        primaryVariantLightBG = Grey20,
         errorLight = Red20,
         primaryLight = Green10,
         primaryLightBG = Green10,
@@ -84,10 +84,10 @@ val lightExtendedColors =
         productViewBG = Grey110,
         toastBackground = Grey110,
         toastText = Grey90,
-        neutralBlue = DarkBlue50,
+        neutralBlue = Grey50,
         neutralWhite = Grey10.copy(alpha = 0.6f),
         primaryLightBG2 = Green30,
-        colorWhiteTransparent = WhiteTransparent,
+        colorWhiteTransparent = fadeWhite,
         lightGreenBG1 = Green20
     )
 
@@ -98,8 +98,8 @@ val lightExtendedColors =
 
 val darkExtendedColors =
     ExtendedColors(
-        primaryVariantLight = Blue30,
-        primaryVariantLightBG = Blue20,
+        primaryVariantLight = Grey30,
+        primaryVariantLightBG = Grey20,
         errorLight = Red20,
         primaryLight = Green20,
         primaryLightBG = Grey90,
@@ -117,23 +117,23 @@ val darkExtendedColors =
         secondarySurface = Grey100,
         productViewBG = Grey110,
         primary = Green70,
-        primaryVariant = Blue60,
-        secondary = DarkBlue60,
+        primaryVariant = Grey60,
+        secondary = Grey60,
         secondaryVariant = YellowGreenSecondary,
         background = Grey110,
         surface = Grey100,
-        onPrimary = Grey40,
+        onPrimary = Color.White,
         onSecondary = Grey40,
         onBackground = Grey40,
-        onSurface = Grey40,
+        onSurface = Color.White,
         error = Red40,
         onError = Grey40,
         toastBackground = Grey20,
         toastText = Grey30,
-        neutralBlue = DarkBlue50,
+        neutralBlue = Grey50,
         neutralWhite = Grey10.copy(alpha = 0.6f),
         primaryLightBG2 = Green10,
-        colorWhiteTransparent = WhiteTransparent,
+        colorWhiteTransparent = fadeWhite,
         lightGreenBG1 = Green40
     )
 

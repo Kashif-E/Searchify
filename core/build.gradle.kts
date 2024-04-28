@@ -56,6 +56,13 @@ android {
         resources.excludes.add("META-INF/LICENSE.md")
     }
 
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.12"
+    }
+
 }
 
 dependencies {
