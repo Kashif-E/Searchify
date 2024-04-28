@@ -7,8 +7,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -27,7 +25,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -41,7 +38,7 @@ import com.kashif.designsystem.theme.shapes.LocalShapes
 import com.kashif.designsystem.theme.spacing.LocalSpacing
 import com.kashif.presentation.components.MovieAsyncImage
 
-@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun SharedTransitionScope.DetailsScreen(
     url: String,
@@ -52,10 +49,9 @@ fun SharedTransitionScope.DetailsScreen(
 ) {
 
     val movieState by moviesViewModel.moviesState.collectAsState()
-    val currentMovie by remember {
-        derivedStateOf {
-            movieState.first { it.posterPath == url }
-        }
+    val currentMovie = remember {
+        movieState.first { it.posterPath == url }
+
     }
     Scaffold(topBar = {
        AppBar(title = currentMovie.title, onNavigation = onClick)
