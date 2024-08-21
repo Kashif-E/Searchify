@@ -10,9 +10,9 @@ import androidx.compose.ui.unit.sp
 import com.kashif.designsystem.R
 import com.kashif.designsystem.theme.colors.LocalColors
 
-val regular = FontFamily(Font(R.font.regular))
-val semiBold = FontFamily(Font(R.font.light))
-val bold = FontFamily(Font(R.font.bold))
+val regular = FontFamily(Font(R.font.nunito_regular))
+val semiBold = FontFamily(Font(R.font.nunito_semibold))
+val bold = FontFamily(Font(R.font.nunito_bold))
 
 /** Object that holds the custom typography for the Compose theme. */
 object Type {
