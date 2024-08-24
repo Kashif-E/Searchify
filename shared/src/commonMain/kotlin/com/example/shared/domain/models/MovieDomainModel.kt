@@ -1,11 +1,8 @@
-package com.kashif.domain.models
-
-import java.text.SimpleDateFormat
-import java.util.Locale
-import javax.annotation.concurrent.Immutable
+package com.example.shared.domain.models
 
 
-@Immutable
+
+
 data class MovieDomainModel(
     var page: Int,
     val posterPath: String?,
@@ -34,21 +31,22 @@ data class MovieDomainModel(
         fun getBackdropPath(backdropPath: String?): String {
             return BASE_BACKDROP_PATH + backdropPath
         }
-
+//todo fix this later
         fun parseAndFormatDateTime(inputDate: String?): String? {
-            return try {
-                val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-                val parsedDate = inputDate?.let { inputFormat.parse(it) }
-
-                val outputFormat = SimpleDateFormat("MMM-yyyy", Locale.US)
-                parsedDate?.let { outputFormat.format(it) }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                null
-            }
+            return inputDate
+//            return try {
+//                val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+//                val parsedDate = inputDate?.let { inputFormat.parse(it) }
+//
+//                val outputFormat = SimpleDateFormat("MMM-yyyy", Locale.US)
+//                parsedDate?.let { outputFormat.format(it) }
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                null
+//            }
         }
 
-        fun formatFloat(number: Float) = String.format("%.2f", number)
+        fun formatFloat(number: Float) = number.toString()
 
 
     }

@@ -1,8 +1,7 @@
-package com.kashif.data.network.models
+package com.example.shared.data.remote.models
 
-import com.kashif.data.local.entities.MovieEntity
-import com.kashif.domain.models.MovieDomainModel
-import com.kashif.domain.utils.suspendMap
+
+import com.example.shared.domain.models.MovieDomainModel
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -30,26 +29,6 @@ data class MovieDTO(
     val vote_average: Float
 )
 
-fun MovieDTO.asEntity() = MovieEntity(
-    this.page,
-    poster_path,
-    adult,
-    overview,
-    release_date,
-    genre_ids,
-    id,
-    original_title,
-    original_language,
-    title,
-    backdrop_path,
-    popularity,
-    vote_count,
-    video,
-    vote_average
-)
-
-suspend fun List<MovieDTO>.asEntity() = suspendMap { it.asEntity() }
-
 fun MovieDTO.asDomainModel() = MovieDomainModel(
     page = this.page, posterPath = MovieDomainModel.getPosterPath(this.poster_path),
     adult = this.adult,
@@ -70,4 +49,4 @@ fun MovieDTO.asDomainModel() = MovieDomainModel(
 )
 
 
-suspend fun List<MovieDTO>.asDomainModel() = suspendMap { movieDTO -> movieDTO.asDomainModel() }
+suspend fun List<MovieDTO>.asDomainModel() = map { movieDTO -> movieDTO.asDomainModel() }

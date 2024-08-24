@@ -2,9 +2,10 @@ package com.kashif.feature_search.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.shared.domain.models.MovieDomainModel
 import com.kashif.domain.di.DefaultDispatcher
 import com.kashif.domain.di.IoDispatcher
-import com.kashif.domain.models.MovieDomainModel
+
 import com.kashif.feature_search.data.repository.IMovieRepository
 import com.kashif.feature_search.domain.Result
 import com.kashif.feature_search.domain.asResult

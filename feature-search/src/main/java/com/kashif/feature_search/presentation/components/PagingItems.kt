@@ -1,13 +1,11 @@
 package com.kashif.feature_search.presentation.components
 
-import androidx.compose.foundation.lazy.grid.LazyGridItemScope
-import androidx.compose.foundation.lazy.grid.LazyGridScope
-import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridScope
 import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
 import androidx.compose.runtime.Composable
-import com.kashif.data.network.Api
+import com.example.shared.data.remote.Api
+
 
 inline fun <T> LazyStaggeredGridScope.paging(
     items: List<T>,

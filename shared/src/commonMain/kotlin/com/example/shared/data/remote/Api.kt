@@ -1,4 +1,4 @@
-package com.kashif.data.network
+package com.example.shared.data.remote
 
 
 object Api {

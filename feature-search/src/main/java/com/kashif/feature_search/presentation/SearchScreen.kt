@@ -47,10 +47,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.shared.domain.models.MovieDomainModel
 import com.kashif.designsystem.components.AppBar
 import com.kashif.designsystem.theme.colors.LocalColors
 import com.kashif.designsystem.theme.spacing.LocalSpacing
-import com.kashif.domain.models.MovieDomainModel
 import com.kashif.feature_search.R
 import com.kashif.feature_search.presentation.components.MovieCard
 import com.kashif.feature_search.presentation.components.SearchCardWithBorder

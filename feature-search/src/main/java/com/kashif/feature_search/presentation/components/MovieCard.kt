@@ -10,9 +10,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.example.shared.domain.models.MovieDomainModel
 import com.kashif.designsystem.theme.colors.LocalColors
 import com.kashif.designsystem.theme.shapes.LocalShapes
-import com.kashif.domain.models.MovieDomainModel
 import com.kashif.presentation.components.MovieAsyncImage
 import kotlin.random.Random
 import kotlin.random.nextInt

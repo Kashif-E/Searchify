@@ -33,8 +33,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     hilt {
         enableAggregatingTask = false
@@ -42,7 +42,7 @@ android {
 
     room { schemaDirectory("$projectDir/schemas") }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     testOptions {
         unitTests.all {
@@ -95,6 +95,8 @@ dependencies {
     testImplementation(libs.junit.jupiter.params)
     androidTestImplementation(libs.junit.jupiter.api)
     androidTestImplementation(libs.android.test.extensions)
+
+    api(projects.shared)
 
 
 }

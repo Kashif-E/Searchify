@@ -1,7 +1,7 @@
 package com.kashif.feature_search.data.repository
 
 import androidx.annotation.WorkerThread
-import com.kashif.domain.models.MovieDomainModel
+import com.example.shared.domain.models.MovieDomainModel
 import kotlinx.coroutines.flow.Flow
 
 interface IMovieRepository {

@@ -30,8 +30,8 @@ class MainActivity : ComponentActivity() {
         )
         super.onCreate(savedInstanceState)
         setContent {
-
             SearchifyTheme {
+
                NavHost(modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars))
             }
         }
