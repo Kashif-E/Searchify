@@ -1,11 +1,11 @@
-package com.kashif.data.local.dao
+package com.example.shared.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.kashif.data.local.entities.MovieEntity
+import com.example.shared.data.local.entities.MovieEntity
 
 @Dao
 interface MovieDao {

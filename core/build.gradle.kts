@@ -4,8 +4,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.hiltAndroid)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.androidRoom)
     alias(libs.plugins.androidJunit5)
 }

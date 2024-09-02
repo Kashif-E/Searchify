@@ -1,7 +1,7 @@
 package com.kashif.feature_search.di
 
 import com.example.shared.data.remote.RemoteDataSource
-import com.kashif.data.local.dao.MovieDao
+import com.example.shared.data.local.dao.MovieDao
 import com.kashif.feature_search.data.repository.IMovieRepository
 import com.kashif.feature_search.data.repository.MovieRepository
 import dagger.Binds

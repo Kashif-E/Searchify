@@ -1,4 +1,4 @@
-package com.kashif.data.local.converters
+package com.example.shared.data.local.converters
 
 
 import androidx.room.TypeConverter

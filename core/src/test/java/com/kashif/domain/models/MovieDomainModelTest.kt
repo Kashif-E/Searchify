@@ -1,7 +1,7 @@
 package com.kashif.domain.models
 
-import com.kashif.data.local.entities.MovieEntity
-import com.kashif.data.local.entities.asDomainModel
+import com.example.shared.data.local.entities.MovieEntity
+import com.example.shared.data.local.entities.asDomainModel
 import com.kashif.data.network.models.MovieDTO
 import com.kashif.data.network.models.asDomainModel
 import org.junit.jupiter.api.Assertions.*

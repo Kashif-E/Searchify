@@ -4,9 +4,9 @@ import androidx.annotation.WorkerThread
 import com.example.shared.data.remote.RemoteDataSource
 import com.example.shared.data.remote.models.asDomainModel
 import com.example.shared.domain.models.MovieDomainModel
-import com.kashif.data.local.dao.MovieDao
-import com.kashif.data.local.entities.asDomainModel
-import com.kashif.data.local.entities.asEntity
+import com.example.shared.data.local.dao.MovieDao
+import com.example.shared.data.local.entities.asDomainModel
+import com.example.shared.data.local.entities.asEntity
 import com.kashif.domain.utils.suspendMap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

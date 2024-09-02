@@ -2,8 +2,8 @@ package com.kashif.domain.di
 
 import android.content.Context
 import androidx.room.Room
-import com.kashif.data.local.MovieDB
-import com.kashif.data.local.dao.MovieDao
+import com.example.shared.data.local.MovieDB
+import com.example.shared.data.local.dao.MovieDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.android.qualifiers.ApplicationContext

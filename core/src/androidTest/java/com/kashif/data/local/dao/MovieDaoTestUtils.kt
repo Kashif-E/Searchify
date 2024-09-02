@@ -1,6 +1,6 @@
 package com.kashif.data.local.dao
 
-import com.kashif.data.local.entities.MovieEntity
+import com.example.shared.data.local.entities.MovieEntity
 
 object MovieDaoTestUtils {
 

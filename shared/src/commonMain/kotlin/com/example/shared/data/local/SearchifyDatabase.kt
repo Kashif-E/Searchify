@@ -1,11 +1,11 @@
-package com.kashif.data.local
+package com.example.shared.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.kashif.data.local.converters.IntegerListConverter
-import com.kashif.data.local.dao.MovieDao
-import com.kashif.data.local.entities.MovieEntity
+import com.example.shared.data.local.converters.IntegerListConverter
+import com.example.shared.data.local.dao.MovieDao
+import com.example.shared.data.local.entities.MovieEntity
 
 @Database(
     entities = [MovieEntity::class],
@@ -20,3 +20,5 @@ abstract class MovieDB : RoomDatabase() {
     abstract fun movieDao(): MovieDao
 
 }
+
+expect fun provideDatabase(context: Any): MovieDB

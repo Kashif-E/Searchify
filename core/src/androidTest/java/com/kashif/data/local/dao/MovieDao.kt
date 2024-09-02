@@ -1,7 +1,8 @@
 package com.kashif.data.local.dao
 
 import androidx.test.filters.SmallTest
-import com.kashif.data.local.MovieDB
+import com.example.shared.data.local.dao.MovieDao
+import com.example.shared.data.local.MovieDB
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.test.runTest

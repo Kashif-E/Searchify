@@ -1,10 +1,9 @@
-package com.kashif.data.local.entities
+package com.example.shared.data.local.entities
 
 import androidx.room.Entity
 import com.example.shared.data.remote.models.MovieDTO
 import com.example.shared.domain.models.MovieDomainModel
 
-import com.kashif.domain.utils.suspendMap
 
 
 @Entity(primaryKeys = [("id")])
@@ -45,7 +44,7 @@ fun MovieEntity.asDomainModel() = MovieDomainModel(
 
 )
 
-suspend fun List<MovieEntity>.asDomainModel() = suspendMap { movieEntity -> movieEntity.asDomainModel() }
+suspend fun List<MovieEntity>.asDomainModel() = map { movieEntity -> movieEntity.asDomainModel() }
 
 
 
