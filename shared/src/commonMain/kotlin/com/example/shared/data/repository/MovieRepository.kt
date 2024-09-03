@@ -1,21 +1,21 @@
-package com.kashif.feature_search.data.repository
+package com.example.shared.data.repository
 
-import androidx.annotation.WorkerThread
+
 import com.example.shared.data.remote.RemoteDataSource
 import com.example.shared.data.remote.models.asDomainModel
 import com.example.shared.domain.models.MovieDomainModel
 import com.example.shared.data.local.dao.MovieDao
 import com.example.shared.data.local.entities.asDomainModel
 import com.example.shared.data.local.entities.asEntity
-import com.kashif.domain.utils.suspendMap
+import com.example.shared.domain.utils.suspendMap
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-class MovieRepository @Inject constructor(
+
+class MovieRepository(
     private val movieDao: MovieDao, private val movieService: RemoteDataSource
 ) : IMovieRepository {
-    @WorkerThread
+
     override fun getMovies(page: Int): Flow<List<MovieDomainModel>> = flow {
         val localMovies = movieDao.getMovieList(page)
         if (localMovies.isEmpty()) {

@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import com.example.shared.presentation.MoviesViewModel
 import com.kashif.designsystem.components.AppBar
 import com.kashif.designsystem.theme.colors.LocalColors
 import com.kashif.designsystem.theme.shapes.LocalShapes

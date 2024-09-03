@@ -1,14 +1,15 @@
-package com.kashif.feature_search.domain
+package com.example.shared.domain.utils
+
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
+import kotlinx.io.IOException
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.MissingFieldException
 import kotlinx.serialization.SerializationException
-import retrofit2.HttpException
-import java.io.IOException
+
 
 
 sealed interface Result<out T> {
@@ -31,21 +32,6 @@ fun <T> Flow<T>.asResult(
 
 @OptIn(ExperimentalSerializationApi::class)
 fun Throwable.getRealExceptionString() = when (this) {
-    is HttpException -> {  // Handle errors based on HTTP status codes
-        when (val statusCode = this.code()) {
-            in 400..499 -> {
-                "Client Error: HTTP $statusCode"
-            }
-
-            in 500..599 -> {
-                "Server Error: HTTP $statusCode"
-            }
-
-            else -> {
-                "Unexpected HTTP Response: HTTP $statusCode"
-            }
-        }
-    }
 
     is MissingFieldException ->{
         "Result contained missing fields ${this.missingFields}."

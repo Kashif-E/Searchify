@@ -1,4 +1,4 @@
-package com.kashif.feature_search.data.repository
+package com.example.shared.data.repository
 
 import androidx.annotation.WorkerThread
 import com.example.shared.domain.models.MovieDomainModel

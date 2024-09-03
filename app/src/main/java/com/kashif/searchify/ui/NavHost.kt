@@ -15,9 +15,10 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.shared.presentation.MoviesViewModel
 import com.kashif.feature_search.presentation.DetailsScreen
-import com.kashif.feature_search.presentation.MoviesViewModel
 import com.kashif.feature_search.presentation.SearchScreen
+import org.koin.compose.viewmodel.koinViewModel
 import java.net.URLDecoder
 import java.net.URLEncoder
 
@@ -49,7 +50,7 @@ fun NavHost(modifier: Modifier = Modifier) {
                 val parentEntry = remember(it) {
                     navController.getBackStackEntry(Route.List.route)
                 }
-                val viewModel: MoviesViewModel = hiltViewModel(parentEntry)
+                val viewModel: MoviesViewModel = koinViewModel()
                 SearchScreen(
                     viewModel = viewModel,
                     animatedVisibilityScope = this@composable,
@@ -65,7 +66,7 @@ fun NavHost(modifier: Modifier = Modifier) {
                 val parentEntry = remember(backstackEntry) {
                     navController.getBackStackEntry(Route.List.route)
                 }
-                val viewModel: MoviesViewModel = hiltViewModel(parentEntry)
+                val viewModel: MoviesViewModel = koinViewModel()
                 val url = backstackEntry.getParameter("url")
                 DetailsScreen(
                     url = url,

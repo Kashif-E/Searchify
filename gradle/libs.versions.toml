@@ -14,10 +14,13 @@ coreKtx = "1.13.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
+kotlinxDatetime = "0.6.1"
 kotlinxSerializationJson = "1.6.3"
+lifecycleRuntimeCompose = "2.8.0"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.9.0"
 composeBom = "2024.04.01"
+lifecycleViewmodelCompose = "2.8.0"
 loggingInterceptor = "4.12.0"
 material = "1.6.6"
 appcompat = "1.6.1"
@@ -37,6 +40,8 @@ animationCompose = "1.7.0-alpha07"
 foundationCompose = "1.7.0-alpha07"
 ktor_version = "3.0.0-beta-2"
 jetbrainsKotlinJvm = "1.9.23"
+koin-ksp-version = "1.4.0-RC4"
+koin = "4.0.0-RC2"
 
 [libraries]
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
@@ -63,6 +68,7 @@ androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecyc
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 
+
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
@@ -73,7 +79,10 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jun
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junitJupiterEngine" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junitJupiterApi" }
 junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junitJupiterParams" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
+lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
@@ -94,6 +103,15 @@ ktor-client-logging = {module = "io.ktor:ktor-client-logging", version.ref = "kt
 ktor-json = {module = "io.ktor:ktor-client-json", version.ref = "ktor_version"}
 ktor-serialization-json = {module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor_version"}
 ktor-contentnegotiation = {module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor_version"}
+
+
+
+koin-core = { module = "io.insert-koin:koin-core",version.ref = "koin" }
+koin-compose-mp = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koin-ksp-version" }
+koin-ksp-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koin-ksp-version" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

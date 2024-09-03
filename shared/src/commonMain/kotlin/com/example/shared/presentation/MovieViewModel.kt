@@ -1,15 +1,11 @@
-package com.kashif.feature_search.presentation
+package com.example.shared.presentation
+
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shared.domain.models.MovieDomainModel
-import com.kashif.domain.di.DefaultDispatcher
-import com.kashif.domain.di.IoDispatcher
-
-import com.kashif.feature_search.data.repository.IMovieRepository
-import com.kashif.feature_search.domain.Result
-import com.kashif.feature_search.domain.asResult
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.shared.data.repository.IMovieRepository
+import com.example.shared.domain.utils.asResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,14 +19,17 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
-import javax.inject.Inject
+import org.koin.android.annotation.KoinViewModel
+import org.koin.core.Koin
+import org.koin.core.qualifier.named
+
 
 @OptIn(FlowPreview::class)
-@HiltViewModel
-class MoviesViewModel @Inject constructor(
+@KoinViewModel
+class MoviesViewModel(
     private val movieRepository: IMovieRepository,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher = Koin().get(named("ioDispatcher")),
+    private val defaultDispatcher: CoroutineDispatcher = Koin().get(named("defaultDispatcher"))
 ) : ViewModel() {
 
 
@@ -60,7 +59,6 @@ class MoviesViewModel @Inject constructor(
     val searchMoviesState = _searchMoviesState
 
 
-
     fun getCurrentPage() = currentPage
     fun onEvent(event: UIEvent) {
         when (event) {
@@ -73,6 +71,7 @@ class MoviesViewModel @Inject constructor(
     init {
         onEvent(UIEvent.FetchNextPage)
     }
+
     private fun fetchNextPage() {
         if (_moviePagingState.value !is PagingState.Loading && _moviePagingState.value !is PagingState.Appending) {
             getMovies()
@@ -85,12 +84,12 @@ class MoviesViewModel @Inject constructor(
 
             movieRepository.getMovies(currentPage).asResult().collectLatest { result ->
                 when (result) {
-                    is Result.Error -> {
+                    is com.example.shared.domain.utils.Result.Error-> {
                         _moviePagingState.update { PagingState.Error(result.errorMessage) }
 
                     }
 
-                    Result.Loading -> {
+                    com.example.shared.domain.utils.Result.Loading -> {
                         _moviePagingState.update {
                             if (currentPage > 1) {
                                 PagingState.Appending
@@ -101,7 +100,7 @@ class MoviesViewModel @Inject constructor(
 
                     }
 
-                    is Result.Success -> {
+                    is com.example.shared.domain.utils.Result.Success -> {
                         currentPage++
                         _moviePagingState.update { PagingState.Success }
                         _movies.update { movies ->

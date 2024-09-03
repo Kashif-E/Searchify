@@ -1,4 +1,5 @@
-package com.kashif.domain.utils
+package com.example.shared.domain.utils
+
 
 
 import kotlinx.coroutines.Dispatchers
@@ -18,4 +19,3 @@ suspend inline fun <T, R> Iterable<T>.suspendMap(crossinline transform: suspend 
 
 fun <T> Iterable<T>.collectionSizeOrDefault(default: Int): Int =
     if (this is Collection<*>) this.size else default
-

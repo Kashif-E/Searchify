@@ -1,8 +1,5 @@
 package com.example.shared.domain.models
 
-
-
-
 data class MovieDomainModel(
     var page: Int,
     val posterPath: String?,

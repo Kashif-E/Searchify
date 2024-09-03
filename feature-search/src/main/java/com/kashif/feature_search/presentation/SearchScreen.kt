@@ -48,6 +48,10 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.shared.domain.models.MovieDomainModel
+import com.example.shared.presentation.MoviesViewModel
+import com.example.shared.presentation.PagingState
+import com.example.shared.presentation.SearchScreenState
+import com.example.shared.presentation.UIEvent
 import com.kashif.designsystem.components.AppBar
 import com.kashif.designsystem.theme.colors.LocalColors
 import com.kashif.designsystem.theme.spacing.LocalSpacing

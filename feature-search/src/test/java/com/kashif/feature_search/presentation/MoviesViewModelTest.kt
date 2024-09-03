@@ -2,7 +2,7 @@ package com.kashif.feature_search.presentation
 
 import app.cash.turbine.test
 import com.kashif.domain.models.MovieDomainModel
-import com.kashif.feature_search.data.repository.IMovieRepository
+import com.example.shared.data.repository.IMovieRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
